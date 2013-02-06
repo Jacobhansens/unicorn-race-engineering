@@ -1,0 +1,8 @@
+Package: datalog
+Priority: optional
+Section: misc
+Description: Datalog application designed for Unicorn Race Engineering
+Maintainer: OpenWrt Developers Team <openwrt-devel@openwrt.org>
+Source: http://svn.openwrt.org/openwrt/trunk/openwrt/package/datalog
+Version: 1-1
+Architecture: mipsel
