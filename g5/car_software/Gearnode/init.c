@@ -12,28 +12,13 @@
 * Timer
 *
 * Counter0  (8-bit): Timer til ADC konvertering
-* Counter1 (16-bit): Timer til gear motor PWM
-* Counter2  (8-bit): 
 *************************************************/
 
 void ioinit(void)
 {
-	DDRA|= (1<<PA0);	// Retning A set
-	DDRA|= (1<<PA1);	// Retning B set
-	DDRA|= (1<<PA2);	// Retning A Enable
-	DDRA|= (1<<PA3);	// Retning B Enalbe
-		
-	DDRB|= (1<<PB5);	// PWM til gearMotor
-    DDRE|= (1<<PE5);    // PWM til TEST
-
+    // Servo
+    DDRE|= (1<<PE5);    // PWM til Servo
 	DDRF &=~(1<<PF1);	// Position sense
-	DDRF &=~(1<<PF0);	// CS (Current Sense !)
-
-	// Hbro Disable (h-bro slukkes ved start)
-	PORTA &=~ (1<<PA0);	
-	PORTA &=~ (1<<PA1);	
-	PORTA &=~ (1<<PA2);	
-	PORTA &=~ (1<<PA3);	
 
 	// Ign cut (output)
 	DDRE|= (1<<PE4);
@@ -43,13 +28,6 @@ void ioinit(void)
 	DDRE &=~ (1<<PE7);
 	PORTE |= (1<<PE7); // Pull-up
 
-	// GearKontakter (direkte interface, kan bruges hvis CAN fejler)
-	//DDRE&=~(1<<PE5);
-	//DDRE&=~(1<<PE6);
-	//DDRE&=~(1<<PE7);
-	//PORTE |= (1<<PE5); // Pull-up
-	//PORTE |= (1<<PE6); // Pull-up
-	//PORTE |= (1<<PE7); // Pull-up
 }
 
 void uartinit(void)
@@ -69,32 +47,6 @@ void uartinit(void)
 
 	// Tx Uart interrupt (Transmit Complete Interrupt)
 	//UCSR0B|=(1<<TXCIE0);
-}
-
-void pwm16Init(void)
-{
-	//PWM, 16 bit counter (counter1)
-	// (OC1A) Output
-    DDRB|= (1<<PB5);  
-     
-	// Compare match.
-	TCCR1A |=(1<<COM1A1);
-	TCCR1A &=~(1<<COM1A0);
-
-	// FAST-PWM TOP = ICRn
-	TCCR1A &=~(1<<WGM10);
-	TCCR1A |=(1<<WGM11);
-	TCCR1B |=(1<<WGM12);
-	TCCR1B |=(1<<WGM13);
-
-	//Top (11-bit)
-	ICR1H = 0x07;
-	ICR1L = 0xFF;
-
-	// Prescaler, 64
-    TCCR1B &=~(1<<CS10);
-	TCCR1B |=(1<<CS11); 
-	TCCR1B &=~(1<<CS12);
 }
 
 void pwm16Init2(void)
@@ -118,7 +70,7 @@ void pwm16Init2(void)
 	ICR3L = 0xFF;
     
 	// Prescaler, 64
-    TCCR3B &=~(1<<CS30);
+    TCCR3B |=(1<<CS30);
 	TCCR3B |=(1<<CS31);
 	TCCR3B &=~(1<<CS32);
 }
@@ -134,11 +86,15 @@ void counter0Init(void)
 void adcInit(unsigned int channel)
 {
 	// ADC channel
-	ADMUX=(channel & 0x0f);
+	ADMUX=(1 & 0x0f);
+    
+    //ADC Left adjust
+    ADMUX &=~(1<<ADLAR);
 
 	// Vref config
 	ADMUX |=(1<<REFS0); 
 	ADMUX &=~(1<<REFS1);
+    
 
 	// ADC ENABLE
 	ADCSRA |=(1<<ADEN); 
@@ -146,17 +102,9 @@ void adcInit(unsigned int channel)
 	// ADC frequency prescaler
 	ADCSRA |=(1<<ADPS0);
 	ADCSRA |=(1<<ADPS1);
-	ADCSRA |=(1<<ADPS2);
-
-	/* ADC Tigger mode
-	ADCSRA |=(1<<ADATE); 
-
-	// ADC trigger source
-	ADCSRB &=~(1<<ADTS0); 
-	ADCSRB &=~(1<<ADTS1);
-	ADCSRB |=(1<<ADTS2);
-	*/	
+	ADCSRA |=(1<<ADPS2);	
 
 	// ADC interrupt enable
 	ADCSRA |=(1<<ADIE);
+   
 }
