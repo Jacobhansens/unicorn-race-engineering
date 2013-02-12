@@ -7,11 +7,12 @@ var t = 0
 function load(){
 $(document).ready(function(){
 		t = t + 0.005;
-		$("#speed").load("localhost:8000/test.xml speed");
-		$("#force").load("test.xml?t=" + Math.random() + " force");
-		$("#heading").load("info.xml?t=" + Math.random() + " heading");
+		$("#speed").load("http://localhost:8000/tester.xml?t=" + t + " speed");
+		//$("#force").load("test.xml?t=" + Math.random() + " force");
+		//$("#heading").load("info.xml?t=" + Math.random() + " heading");
+		
 	});
-	setTimeout(load,100);
+	setTimeout(load,1000);
 }
 load();
 </script>
