@@ -15,16 +15,11 @@ void counter0Init(void);
 void PWM_duty_cycle_A16_set(unsigned int);
 void pwm16Init(void);
 void pwm16Init2(void);
+void servo_direction(unsigned int)
 
 // ADC
 void adcInit(unsigned int);
 void adcStop(void);
 
-// Hbro
-void hbroEnable(unsigned short int);
-void motorControl(unsigned short int ret, unsigned int speed);
-
-// Force controller
-unsigned int torqueController(unsigned int current);
 
 unsigned short int getBut(void);
