@@ -86,10 +86,10 @@ void counter0Init(void)
 void adcInit(unsigned int channel)
 {
 	// ADC channel
-	ADMUX=(1 & 0x0f);
+	ADMUX=(channel & 0x0f);
     
     //ADC Left adjust
-    ADMUX &=~(1<<ADLAR);
+   // ADMUX &=~(1<<ADLAR);
 
 	// Vref config
 	ADMUX |=(1<<REFS0); 
@@ -102,7 +102,16 @@ void adcInit(unsigned int channel)
 	// ADC frequency prescaler
 	ADCSRA |=(1<<ADPS0);
 	ADCSRA |=(1<<ADPS1);
-	ADCSRA |=(1<<ADPS2);	
+	ADCSRA |=(1<<ADPS2);
+    
+     // ADC Tigger mode
+     ADCSRA |=(1<<ADATE);
+     
+     // ADC trigger source
+     ADCSRB &=~(1<<ADTS0);
+     ADCSRB &=~(1<<ADTS1);
+     ADCSRB |=(1<<ADTS2);
+     
 
 	// ADC interrupt enable
 	ADCSRA |=(1<<ADIE);

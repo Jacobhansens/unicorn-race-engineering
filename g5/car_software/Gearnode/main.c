@@ -23,6 +23,7 @@
 extern unsigned int GearEst_val;
 unsigned int pos = 0;
 
+
 int main(void)
 {
 	_delay_ms(500);
@@ -64,7 +65,13 @@ int main(void)
 		//data_buf[1] = 0;
 		//data_buf[2] = GearEst_val;
 		//can_send_non_blocking(rpm_msgid, data_buf, 3);
-        pos =1;
+        _delay_ms(2000);
+        servoPosition(TOPPOS);
+        _delay_ms(2000);
+        servoPosition(MIDPOS);
+        _delay_ms(2000);
+        servoPosition(BUTPOS);
+        
 	}
     return 0;
 }

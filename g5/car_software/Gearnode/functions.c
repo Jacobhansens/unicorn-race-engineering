@@ -9,17 +9,13 @@
 #include <stdlib.h>
 #include <avr/interrupt.h>
 
-void servo_direction(unsigned int x)
+void servoPosition(unsigned int position)
 {
-    if (x==0){
-        OCR3CH = (0x00);//Minimum: 0x00, 0x45;
-        OCR3CL = (0x45);
-    }
-    else if (x==1){
-        OCR3CH = (0x01); //Maximum: 0x01, 0xAE;
-        OCR3CL = (0xAE);
-    }
-}
+    float dutyCycle = (0.6278260870)*(float)position+(42.63130435);
+    OCR3CH = (0xFF) & ((int)dutyCycle>>8);
+    OCR3CL = (0xFF) & ((int)dutyCycle);
+    
+}//Maximum: 0x01, 0xAE;// Middle position//Minimum: 0x00, 0x45;
 
 unsigned short int getBut(void)
 {

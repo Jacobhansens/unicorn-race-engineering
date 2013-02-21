@@ -16,17 +16,6 @@
 
 // ADC
 unsigned int ADCconv = 0;
-//unsigned int pos = GEARPOSMID;
-unsigned int posOld = 0;
-unsigned int current = 0;
-unsigned int currentOld = 0;
-char setChannel = 0;
-char channel = 0;
-
-// PWM
-//unsigned int pwmOut = DUTY70;
-
-
 
 // Gear
 unsigned short int gearBut = 0;
@@ -48,5 +37,25 @@ ISR(ADC_vect,ISR_NOBLOCK)
 	ADCconv = (unsigned int)((adhigh<<8)|(adlow & 0xFF));
     //ADCconv = (ADCconv-1023)*-1; //Hvis det skal vendes
     pos = ADCconv;
+    sendtekst("Position: ");
+    itoa(pos,tempchar,10);
+    sendtekst(tempchar);
+    sendtekst("\r\n");
 }
 
+// Timer0 (8-bit) overflow interrupt (168 Hz)
+ISR(TIMER0_OVF_vect)
+{
+    /*
+	if((i%15)==0)
+	{
+		sendtekst("Position: ");
+		itoa(pos,tempchar,10);
+		sendtekst(tempchar);
+		sendtekst("\r\n");
+        
+		i = 0;
+	}
+	i++;
+     */
+}

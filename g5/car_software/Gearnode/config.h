@@ -29,8 +29,13 @@
 // Gearneutralmeasure
 #define GEARNEUTRALMEAS (!((PINE&0b10000000)==0b10000000))
 
-//Counter0 Prescaler
+// Counter0 Prescaler
 #define counter0prescale256 4
+
+// Motor positions
+#define TOPPOS 617
+#define MIDPOS 332
+#define BUTPOS 42
 
 // Error msg.
 #define ERRORMSG_NOERROR 0
