@@ -21,7 +21,11 @@
 
 
 extern unsigned int GearEst_val;
-unsigned int pos = 0;
+unsigned int gearPosition = 0;
+unsigned int gearPositionOld = 0;
+unsigned int gearGotoPosition = 0;
+unsigned int gearActive = 0;
+unsigned int gearCounter = 0;
 
 
 int main(void)
@@ -65,12 +69,12 @@ int main(void)
 		//data_buf[1] = 0;
 		//data_buf[2] = GearEst_val;
 		//can_send_non_blocking(rpm_msgid, data_buf, 3);
-        _delay_ms(2000);
+        
+        _delay_ms(1000);
         servoPosition(TOPPOS);
-        _delay_ms(2000);
-        servoPosition(MIDPOS);
-        _delay_ms(2000);
+        _delay_ms(1000);
         servoPosition(BUTPOS);
+        
         
 	}
     return 0;
