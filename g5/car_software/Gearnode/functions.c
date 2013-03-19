@@ -15,7 +15,7 @@ void servoPosition(unsigned int position) {
     float dutyCycle = (0.6278260870)*(float)position+(42.63130435);
     OCR3CH = (0xFF) & ((int)dutyCycle>>8);
     OCR3CL = (0xFF) & ((int)dutyCycle);
-}//Maximum: 0x01, 0xAE;// Middle position//Minimum: 0x00, 0x45;
+}//Maximum: 0x01, 0xAE; //Minimum: 0x00, 0x45;
 
 void servoCheck(void)
 {
@@ -25,12 +25,12 @@ void servoCheck(void)
         if (gearGotoPosition != MIDPOS) {
             servoPosition(MIDPOS);
         }
-    }/*
+    }
     else if (gearCounter > 20) {
         gearActive = 0;
         gearCounter = 0;
         servoPosition(MIDPOS);
-    }*/
+    }
     else if (abs(gearPosition - gearPositionOld) < 5) {
         gearCounter++;
     }

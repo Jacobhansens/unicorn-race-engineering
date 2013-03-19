@@ -35,6 +35,9 @@
 // Motor positions
 #define TOPPOS 617
 #define MIDPOS 332
+// gear 1 ca. 500
+// neutral ca. 230
+// gear 2,3,4,5 ca. 150
 #define BUTPOS 42
 
 // Error msg.

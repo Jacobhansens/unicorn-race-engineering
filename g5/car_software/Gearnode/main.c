@@ -24,8 +24,11 @@ extern unsigned int GearEst_val;
 unsigned int gearPosition = 0;
 unsigned int gearPositionOld = 0;
 unsigned int gearGotoPosition = 0;
-unsigned int gearActive = 0;
 unsigned int gearCounter = 0;
+unsigned int gearBut = 0;
+unsigned short int gearActive = 0;
+unsigned short int gearButActive = 0;
+unsigned short int gearButCAN = 0;
 
 
 int main(void)
@@ -49,14 +52,12 @@ int main(void)
 	//rpm_msg.status = 0;
 
 	//can_update_rx_msg(&rpm_msg, rpm_msgid, 8);
-	//can_update_rx_msg(&rpm_msg, gear_msgid, 8);
+    can_update_rx_msg(&rpm_msg, gear_msgid, 8);
 
 	Can_sei();
 	Can_set_tx_int();
 	Can_set_rx_int();
     
-    //Full turn time: ~700 ms
-    int time = 2000;
 	while(1)
 	{
 		//_delay_ms(100);
@@ -71,10 +72,7 @@ int main(void)
 		//can_send_non_blocking(rpm_msgid, data_buf, 3);
         
         _delay_ms(1000);
-        servoPosition(TOPPOS);
-        _delay_ms(1000);
-        servoPosition(BUTPOS);
-        
+        servoPosition(230);
         
 	}
     return 0;

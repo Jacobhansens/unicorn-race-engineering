@@ -1,4 +1,5 @@
 #include "config.h"
+#include "extern.h"
 #include "can_std/can_lib.h"
 #include "can_new.h"
 #include "test_vars.h"
@@ -7,10 +8,6 @@
 #include "prototyper.h"
 
 st_cmd_t tx_remote_msg;
-
-extern unsigned short int gearButCAN;
-extern unsigned int roadSpeed_val;
-extern unsigned int rpm_val;
 
 unsigned short int can_update_rx_msg(st_cmd_t* msg, U8 msg_id, U8 dlc)
 {

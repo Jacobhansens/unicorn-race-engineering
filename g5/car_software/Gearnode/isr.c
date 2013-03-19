@@ -17,10 +17,6 @@
 // ADC
 unsigned int ADCconv = 0;
 
-// Gear
-unsigned short int gearBut = 0;
-unsigned short int gearButCAN = 0;
-
 // Debugging
 char tempchar[10];
 unsigned short int i = 0;
@@ -46,8 +42,26 @@ ISR(TIMER0_OVF_vect)
 {
     servoCheck();
     
+    gearBut = gearButCAN;
+    
+    if((gearBut == 0) || (gearBut == GEARNEUBUT))
+		gearButActive = 2;
+    else gearButActive = 1;
+    
 	if((i%15)==0)
 	{
+        /* Data til leg med gear knapper
+        sendtekst("gearButCAN: ");
+		itoa(gearButCAN,tempchar,2);
+		sendtekst(tempchar);
+		sendtekst("\t");
+        
+        sendtekst("gearButActive: ");
+		itoa(gearButActive,tempchar,2);
+		sendtekst(tempchar);
+		sendtekst("\r\n");
+        */
+        /* Data til leg med gear positioner */
 		sendtekst("Pos: ");
 		itoa(gearPosition,tempchar,10);
 		sendtekst(tempchar);
@@ -72,7 +86,7 @@ ISR(TIMER0_OVF_vect)
 		itoa(gearCounter,tempchar,10);
 		sendtekst(tempchar);
 		sendtekst("\r\n");
-        
+
 		i = 0;
 	}
 	i++;
