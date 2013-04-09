@@ -8,8 +8,11 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include <avr/interrupt.h>
+#include "debug.h"
 
 void servoPosition(unsigned int position) {
+	count = 0;
+	gearCounter = 0;
     gearGotoPosition = position;
     gearActive = 1;
     float dutyCycle = (0.6278260870)*(float)position+(42.63130435);
@@ -18,15 +21,15 @@ void servoPosition(unsigned int position) {
 }//Maximum: 0x01, 0xAE; //Minimum: 0x00, 0x45;
 
 void servoCheck(void)
-{
-    if (abs(gearPosition-gearGotoPosition) < 5) {
+{/*
+    if (abs(gearPosition-gearGotoPosition) < 5 && gearCounter > 100) {
         gearActive = 0;
         gearCounter = 0;
         if (gearGotoPosition != MIDPOS) {
             servoPosition(MIDPOS);
         }
-    }
-    else if (gearCounter > 20) {
+    }*/
+     if (gearCounter > 100) {
         gearActive = 0;
         gearCounter = 0;
         servoPosition(MIDPOS);

@@ -72,7 +72,7 @@ int main(void)
 		//can_send_non_blocking(rpm_msgid, data_buf, 3);
         
         _delay_ms(1000);
-        servoPosition(230);
+        servoPosition(230); // 230 is gear ups & 500 is gear down
         
 	}
     return 0;

@@ -13,13 +13,14 @@
 #include <stdlib.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include "debug.h"
 
 // ADC
 unsigned int ADCconv = 0;
 
 // Debugging
 char tempchar[10];
-unsigned short int i = 0;
+unsigned short int count = 0;
 
 // ADC convert complete
 ISR(ADC_vect,ISR_NOBLOCK)
@@ -40,7 +41,7 @@ ISR(ADC_vect,ISR_NOBLOCK)
 // Timer0 (8-bit) overflow interrupt (168 Hz)
 ISR(TIMER0_OVF_vect)
 {
-    servoCheck();
+    //servoCheck();
     
     gearBut = gearButCAN;
     
@@ -48,8 +49,9 @@ ISR(TIMER0_OVF_vect)
 		gearButActive = 2;
     else gearButActive = 1;
     
-	if((i%15)==0)
+	if((count%15)==0)
 	{
+
         /* Data til leg med gear knapper
         sendtekst("gearButCAN: ");
 		itoa(gearButCAN,tempchar,2);
@@ -62,33 +64,34 @@ ISR(TIMER0_OVF_vect)
 		sendtekst("\r\n");
         */
         /* Data til leg med gear positioner */
-		sendtekst("Pos: ");
+		//sendtekst("Pos: ");
 		itoa(gearPosition,tempchar,10);
 		sendtekst(tempchar);
-		sendtekst("\t");
+		//sendtekst("\t");
         
-        sendtekst("PosOld: ");
-		itoa(gearPositionOld,tempchar,10);
-		sendtekst(tempchar);
-		sendtekst("\t");
-        
-        sendtekst("GotoPos: ");
+        //sendtekst("PosOld: ");
+		//itoa(gearPositionOld,tempchar,10);
+		//sendtekst(tempchar);
+		//sendtekst("\t");
+        sendtekst("/");
+        //sendtekst("GotoPos: ");
 		itoa(gearGotoPosition,tempchar,10);
 		sendtekst(tempchar);
-		sendtekst("\t");
+		//sendtekst("\t");
         
-        sendtekst("GearActive: ");
-		itoa(gearActive,tempchar,10);
-		sendtekst(tempchar);
-		sendtekst("\t");
-        
-        sendtekst("GearCounter: ");
+        //sendtekst("GearActive: ");
+		//itoa(gearActive,tempchar,10);
+		//sendtekst(tempchar);
+		//sendtekst("\t");
+        sendtekst(" - ");
+        //sendtekst("GearCounter: ");
 		itoa(gearCounter,tempchar,10);
 		sendtekst(tempchar);
 		sendtekst("\r\n");
+		servoPosition(MIDPOS);
 
-		i = 0;
+		count = 0;
 	}
-	i++;
+	count++;
     
 }
