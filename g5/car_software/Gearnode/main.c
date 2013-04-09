@@ -70,10 +70,19 @@ int main(void)
 		//data_buf[1] = 0;
 		//data_buf[2] = GearEst_val;
 		//can_send_non_blocking(rpm_msgid, data_buf, 3);
-        
-        _delay_ms(1000);
-        servoPosition(230); // 230 is gear ups & 500 is gear down
-        
+        gearUp();
+		gearUp();
+		gearUp();
+		gearUp();
+        gearDown();
+		gearDown();
+		gearDown();
+		gearDown();
+		gearNeutral();
+
+
+		
+		break;
 	}
     return 0;
 }

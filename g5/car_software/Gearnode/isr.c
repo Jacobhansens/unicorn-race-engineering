@@ -49,7 +49,7 @@ ISR(TIMER0_OVF_vect)
 		gearButActive = 2;
     else gearButActive = 1;
     
-	if((count%15)==0)
+	if((count%250)==0)
 	{
 
         /* Data til leg med gear knapper
@@ -88,7 +88,7 @@ ISR(TIMER0_OVF_vect)
 		itoa(gearCounter,tempchar,10);
 		sendtekst(tempchar);
 		sendtekst("\r\n");
-		servoPosition(MIDPOS);
+		//servoPosition(MIDPOS);
 
 		count = 0;
 	}

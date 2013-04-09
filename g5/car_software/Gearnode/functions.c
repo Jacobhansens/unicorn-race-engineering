@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <avr/interrupt.h>
 #include "debug.h"
+#include <util/delay.h>
 
 void servoPosition(unsigned int position) {
 	count = 0;
@@ -19,6 +20,27 @@ void servoPosition(unsigned int position) {
     OCR3CH = (0xFF) & ((int)dutyCycle>>8);
     OCR3CL = (0xFF) & ((int)dutyCycle);
 }//Maximum: 0x01, 0xAE; //Minimum: 0x00, 0x45;
+
+void gearUp(void){
+	servoPosition(230);
+	_delay_ms(GEARWAIT);
+	servoPosition(MIDPOS);
+	_delay_ms(GEARWAIT);
+}
+
+void gearDown(void){
+	servoPosition(500);
+	_delay_ms(GEARWAIT);
+	servoPosition(MIDPOS);
+	_delay_ms(GEARWAIT);
+}
+
+void gearNeutral(void){
+	servoPosition(400);
+	_delay_ms(GEARWAIT);
+	servoPosition(MIDPOS);
+	_delay_ms(GEARWAIT);
+}
 
 void servoCheck(void)
 {/*

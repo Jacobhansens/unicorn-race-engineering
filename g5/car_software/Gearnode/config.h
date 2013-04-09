@@ -39,6 +39,7 @@
 // neutral ca. 230
 // gear 2,3,4,5 ca. 150
 #define BUTPOS 42
+#define GEARWAIT 600
 
 // Error msg.
 #define ERRORMSG_NOERROR 0
