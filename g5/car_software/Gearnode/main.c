@@ -60,16 +60,22 @@ int main(void)
     
 	while(1)
 	{
-		//_delay_ms(100);
-		//data_buf[0] = GearNeutral;
-		//data_buf[1] = GEARNEUTRALMEAS;
-		//data_buf[2] = 0;
-		//can_send_non_blocking(rpm_msgid, data_buf, 3);
-
-		//data_buf[0] = GearEst;
-		//data_buf[1] = 0;
-		//data_buf[2] = GearEst_val;
-		//can_send_non_blocking(rpm_msgid, data_buf, 3);
+		/*
+        _delay_ms(100);
+		data_buf[0] = GearNeutral;
+		data_buf[1] = GEARNEUTRALMEAS;
+		data_buf[2] = 0;
+		can_send_non_blocking(gear_msgid, data_buf, 3);
+        */
+        
+        /*
+		data_buf[0] = GearEst;
+		data_buf[1] = 0;
+		data_buf[2] = GearEst_val;
+		can_send_non_blocking(rpm_msgid, data_buf, 3);
+        */
+         
+        /*
         gearUp();
 		gearUp();
 		gearUp();
@@ -79,10 +85,8 @@ int main(void)
 		gearDown();
 		gearDown();
 		gearNeutral();
+        */
 
-
-		
-		break;
-	}
+    }
     return 0;
 }

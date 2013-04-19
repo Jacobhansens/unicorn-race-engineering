@@ -20,7 +20,8 @@
 // Buttons
 #define GEARUPBUT 0b00000010
 #define GEARDOWNBUT 0b00000001
-#define GEARNEUBUT 0b00000100
+#define GEARNEUBUT1 0b00000101
+#define GEARNEUBUT2 0b00000110
 
 // Ign Cut
 #define IgnCutOn PORTE|= (1<<PE4)
@@ -33,13 +34,13 @@
 #define counter0prescale256 4
 
 // Motor positions
-#define TOPPOS 617
+//#define TOPPOS 617
 #define MIDPOS 332
-// gear 1 ca. 500
-// neutral ca. 230
-// gear 2,3,4,5 ca. 150
-#define BUTPOS 42
-#define GEARWAIT 1000
+//#define BUTPOS 42
+#define UPPOS 210
+#define NEUPOS 400
+#define DOWNPOS 500
+#define GEARWAIT 500
 
 // Error msg.
 #define ERRORMSG_NOERROR 0

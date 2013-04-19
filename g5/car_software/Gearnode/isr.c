@@ -41,18 +41,40 @@ ISR(ADC_vect,ISR_NOBLOCK)
 // Timer0 (8-bit) overflow interrupt (168 Hz)
 ISR(TIMER0_OVF_vect)
 {
+    gearButActive = 0;
     //servoCheck();
-    
     gearBut = gearButCAN;
     
-    if((gearBut == 0) || (gearBut == GEARNEUBUT))
-		gearButActive = 2;
-    else gearButActive = 1;
+    if(gearButActive == 0 && ((gearBut == GEARNEUBUT1) || (gearBut == GEARNEUBUT2))){
+        gearButActive = 1;
+        gearNeutral();
+    }
+    else if (gearButActive == 0 && gearBut == GEARUPBUT){
+        gearButActive = 1;
+        sendtekst("1");
+        gearUp();
+    }
+    else if (gearButActive == 0 && gearBut == GEARDOWNBUT){
+        gearButActive = 1;
+        sendtekst("3");
+        gearDown();
+    }
     
-	if((count%250)==0)
+	if((count%50)==0)
 	{
 
-        /* Data til leg med gear knapper
+        /* Data til leg med gear knapper */
+        /*
+        sendtekst("gearBut2: ");
+		itoa(gearBut,tempchar,2);
+		sendtekst(tempchar);
+		sendtekst("\t");
+        
+        sendtekst("gearBut10: ");
+		itoa(gearBut,tempchar,10);
+		sendtekst(tempchar);
+		sendtekst("\t");
+        */
         sendtekst("gearButCAN: ");
 		itoa(gearButCAN,tempchar,2);
 		sendtekst(tempchar);
@@ -62,36 +84,38 @@ ISR(TIMER0_OVF_vect)
 		itoa(gearButActive,tempchar,2);
 		sendtekst(tempchar);
 		sendtekst("\r\n");
-        */
+        
         /* Data til leg med gear positioner */
 		//sendtekst("Pos: ");
-		itoa(gearPosition,tempchar,10);
-		sendtekst(tempchar);
+		//itoa(gearPosition,tempchar,10);
+		//sendtekst(tempchar);
 		//sendtekst("\t");
         
         //sendtekst("PosOld: ");
 		//itoa(gearPositionOld,tempchar,10);
 		//sendtekst(tempchar);
 		//sendtekst("\t");
-        sendtekst("/");
+        //sendtekst("/");
         //sendtekst("GotoPos: ");
-		itoa(gearGotoPosition,tempchar,10);
-		sendtekst(tempchar);
+		//itoa(gearGotoPosition,tempchar,10);
+		//sendtekst(tempchar);
 		//sendtekst("\t");
         
         //sendtekst("GearActive: ");
 		//itoa(gearActive,tempchar,10);
 		//sendtekst(tempchar);
 		//sendtekst("\t");
-        sendtekst(" - ");
+        //sendtekst(" - ");
         //sendtekst("GearCounter: ");
-		itoa(gearCounter,tempchar,10);
-		sendtekst(tempchar);
-		sendtekst("\r\n");
+		//itoa(gearCounter,tempchar,10);
+		//sendtekst(tempchar);
+		//sendtekst("\r\n");
 		//servoPosition(MIDPOS);
 
 		count = 0;
 	}
 	count++;
     
+    // Is only down here because we want to print
+    gearButCAN = 0;
 }

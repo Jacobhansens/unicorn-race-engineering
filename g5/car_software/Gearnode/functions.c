@@ -22,24 +22,29 @@ void servoPosition(unsigned int position) {
 }//Maximum: 0x01, 0xAE; //Minimum: 0x00, 0x45;
 
 void gearUp(void){
-	servoPosition(230);
+    servoPosition(UPPOS);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
+    sendtekst("2");
+    //gearButActive = 0;
 }
 
 void gearDown(void){
-	servoPosition(500);
+	servoPosition(DOWNPOS);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
+    sendtekst("4");
+    //gearButActive = 0;
 }
 
 void gearNeutral(void){
-	servoPosition(400);
+	servoPosition(NEUPOS);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
+    //gearButActive = 0;
 }
 
 void servoCheck(void)
