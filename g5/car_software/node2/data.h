@@ -14,4 +14,4 @@ typedef struct {
 } parameters;
 
 extern parameters params;
-
+extern int gearActive;

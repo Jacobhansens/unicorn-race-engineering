@@ -10,8 +10,6 @@
 /* ISR for gear buttom */
 ISR(INT6_vect)
 {
-
-	sendtekst("H\n\r");
 	params.GearButDown = 1;
 	/* check state of neutral buttom */
 	if(!((PINC&0b10000000)==0b10000000)) {
