@@ -44,20 +44,38 @@ ISR(TIMER0_OVF_vect)
     gearButActive = 0;
     //servoCheck();
     gearBut = gearButCAN;
+    gearButNeuMeas = GEARNEUTRALMEAS;
     
     if(gearButActive == 0 && ((gearBut == GEARNEUBUT1) || (gearBut == GEARNEUBUT2))){
         gearButActive = 1;
         gearNeutral();
     }
-    else if (gearButActive == 0 && gearBut == GEARUPBUT){
+    else if(gearButActive == 0 && gearBut == GEARUPBUT){
         gearButActive = 1;
         sendtekst("1");
         gearUp();
     }
-    else if (gearButActive == 0 && gearBut == GEARDOWNBUT){
+    else if(gearButActive == 0 && gearBut == GEARDOWNBUT){
         gearButActive = 1;
         sendtekst("3");
         gearDown();
+    }
+    
+    if((gearBut == GEARUPBUT) && (gearButNeuMeas == 0)){
+        if(GearEst_val < 6){
+            GearEst_val++;
+        }
+    }
+    else if((gearBut == GEARDOWNBUT) && (gearButNeuMeas == 0)){
+        if(GearEst_val>1){
+            GearEst_val--;
+        }
+    }
+    else if((gearBut == GEARUPBUT) && (gearButNeuMeas == 1)){
+        GearEst_val = 1;
+    }
+    else if((gearBut == GEARDOWNBUT) && (gearButNeuMeas == 1)){
+        GearEst_val = 2;
     }
     
 	if((count%50)==0)
@@ -75,6 +93,12 @@ ISR(TIMER0_OVF_vect)
 		sendtekst(tempchar);
 		sendtekst("\t");
         */
+        
+        sendtekst("gearNeutralMeas: ");
+		itoa(GEARNEUTRALMEAS,tempchar,10);
+		sendtekst(tempchar);
+		sendtekst("\t");
+        
         sendtekst("gearButCAN: ");
 		itoa(gearButCAN,tempchar,2);
 		sendtekst(tempchar);
