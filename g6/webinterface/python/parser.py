@@ -3,6 +3,7 @@ import time
 import serial
 import Queue
 import struct
+import data
 
 
 '''
@@ -19,18 +20,37 @@ datalength defined in datatype definition
 
 
 class parser(threading.Thread):
-	def __init__(self,connectionname = None,speed=None):
+	def __init__(self,connectionname = None,speed=None,queue=None):
 		threading.Thread.__init__(self)
 		if(speed == None):
 			speed = 115200
 		if connectionname == None:
 			connectionname = "/dev/tty.usbserial-A700eCo8"
-		self.running = 0
 		self.conn = serial.Serial(connectionname,speed,timeout=1)
+		self.q = queue
 		
 	def close(self):
+		#print self.conn
 		self.conn.close()
-		self.running = 0
+		#print self.conn
+
+	def getDataLength(self,dataType):
+		length = data.datatype(ord(dataType)).datalength
+		print data.datatype(ord(dataType)).name
+		return length
+		
+	def parse(self,dataType,readData):
+		#print len(readData)
+		x = 0
+		#print readData
+		if(len(readData) == 1):
+			x = ord(readData[0])
+		elif(len(readData) == 2):
+			x = ord(readData[0])*(2**8)+ord(readData[1])
+		converted = data.datatype(ord(dataType)).conv(x)
+		if(self.q != None):
+			self.q.put([ord(dataType),x])
+	
 		
 	def run(self):
 		dataType = 0
@@ -38,31 +58,34 @@ class parser(threading.Thread):
 			
 			if self.conn.inWaiting() > 0:
 				tmp = self.conn.read()
-				if tmp == 255:
+				if ord(tmp) == 255:
 					tmp = self.conn.read()
-					if tmp == 123:
+					if ord(tmp) == 123:
 						tmp = self.conn.read()
-						if tmp == 10:
+						if ord(tmp) == 10:
 							dataType = self.conn.read()
-							length = getDataLength(dataType)
+							length = self.getDataLength(dataType)/8
 							data = []
 							for i in range(length):
 								data.append(self.conn.read())
-							parse(dataType,data)
+							#print data
+							self.parse(dataType,data)
 
 			time.sleep(0.001)
 	
-	def parse(self,dataType,data):
 		
-	
-	def getDataLength(self,data):
-		return 2
 		
 
 if __name__ == '__main__':
 	print "Starting thread"
-	t = parser()
-	t.start()
-	time.sleep(2)
-	t.running=0;
+	try:
+		t = parser()
+		t.daemon =True
+		t.start()
+		while True: time.sleep(1)
+	except (KeyboardInterrupt, SystemExit):
+		print "Interrupt"
+		
+	t.close()
+	print "Quitting thread"
 	

@@ -5,6 +5,11 @@ from SimpleHTTPServer import SimpleHTTPRequestHandler
 import random
 import time
 from threading import Thread
+import parser
+import data
+import Queue
+
+q = Queue.Queue()
 
 HandlerClass = SimpleHTTPRequestHandler
 ServerClass = BaseHTTPServer.HTTPServer
@@ -15,26 +20,14 @@ speed = 11
 if sys.argv[1:]:
 	port = int(sys.argv[1])
 else:
-	port = 8000
+	port = 9999
 server_adress = ('127.0.0.1', port)
 going = 1
 count = 0
-class writer(Thread):
-	
-	def run(self):
-		self.count = 0
-		while going:
-			self.count += 1
-		
-			f = open('tester.xml','w')
-			f.write("<?xml version='1.0' encoding='UTF-8' ?><Car><speed>" + str(self.count) + "</speed></Car>")
-			f.close()
-			time.sleep(1)
-w = writer()
-w.start()
 
 class MyHandler(SimpleHTTPRequestHandler):
 	def do_GET(self):
+		print "getting!"
 		try:
 			if self.path == "/test.xml":
 				xmlstr = '<?xml version="1.0" encoding="UTF-8" ?>\n<Car><variables><speed>' + str(speed) + '</speed><force><X>' + str(11+random.random()) + '</X><Y>21</Y><Z>9</Z></force><heading>180</heading></variables></Car>'
@@ -65,15 +58,29 @@ class MyHandler(SimpleHTTPRequestHandler):
 	def do_POST(self):
 		global rootnode
 
-
+print "Starting..."
+p = parser.parser()
 HandlerClass.protocol_version = Protocol
 httpd = ServerClass(server_adress, MyHandler)
-
 sa = httpd.socket.getsockname()
-print "Serving HTTP on ", sa[0], ":", sa[1], "..."
+
 try:
-	httpd.serve_forever()
-except KeyboardInterrupt:
+	print "Serving HTTP on", sa[0], ":", sa[1], "..."
+	p = parser.parser()
+	print "Created parser"
+	p.daemon = True
+	print "made parser into daemon"
+	print("what!")
+	p.start()
+	while True:
+		print q.get()
+		httpd.handle()
+		time.sleep(0.01)	
+
+except (KeyboardInterrupt,SystemExit):
 	going = 0
-	t.join()
-	quit()
+	
+httpd.socket.close()
+p.close()
+print "Quitting"
+quit()
