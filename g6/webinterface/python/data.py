@@ -5,7 +5,7 @@ class data(object):
 	def __init__(self):#,name,ID,active,rounddec,datalength,max,min):
 		self.name = "Empty"
 		self.ID = 0
-		self.active = 0
+		self.active = 1
 		self.rounddec = 0
 		self.datalength = 0
 		self.max = 9999
@@ -14,32 +14,32 @@ class data(object):
 	def conv(self,x):
 		return round(x,self.rounddec)
 		
-class FuelPress(data):
+class fuelPress(data):
 	def __init__(self):
-		self.name = "Fuel Press"
+		self.name = "fuelPress"
 		self.ID = 1
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength = 16
 	def conv(self,x):
 		return round(x,self.rounddec)
 		
-class StatusLapCount(data):
+class statusLapCount(data):
 	def __init__(self):
-		self.name = "StatusLapCount"
+		self.name = "statusLapCount"
 		self.ID = 2
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
 	def conv(self,x):
 		return round(x,self.rounddec)
 		
-class StatusInJSum(data):
+class statusInJSum(data):
 	def __init__(self):
-		self.name = "StatusInJSum"
+		self.name = "statusInJSum"
 		self.ID = 3
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -50,7 +50,7 @@ class lastGearShift(data):
 	def __init__(self):
 		self.name = "lastGearShift"
 		self.ID = 4
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -61,7 +61,7 @@ class motorOilTemp(data):
 	def __init__(self):
 		self.name = "motorOilTemp"
 		self.ID = 5
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -72,7 +72,7 @@ class oilPressure(data):
 	def __init__(self):
 		self.name = "oilPressure"
 		self.ID = 6
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -83,7 +83,7 @@ class statusTime(data):
 	def __init__(self):
 		self.name = "statusTime"
 		self.ID = 7
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -94,7 +94,7 @@ class statusLapTime(data):
 	def __init__(self):
 		self.name = "statusLapTime"
 		self.ID = 8
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -105,7 +105,7 @@ class gearOilTemp(data):
 	def __init__(self):
 		self.name = "gearOilTemp"
 		self.ID = 9
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -116,7 +116,7 @@ class statusTraction(data):
 	def __init__(self):
 		self.name = "statusTraction"
 		self.ID = 10
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -127,7 +127,7 @@ class statusGas(data):
 	def __init__(self):
 		self.name = "statusGas"
 		self.ID = 11
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -138,20 +138,20 @@ class statusLambdaV2(data):
 	def __init__(self):
 		self.name = "statusLambdaV2"
 		self.ID = 12
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
 	def conv(self,x):
 		if(x>32768):
 			x = -(65535-x)
-		return round((70-x/64),self.rounddec)
+		return round((70-x/64.0),self.rounddec)
 		
 class statusCamTrigP1(data):
 	def __init__(self):
 		self.name = "statusCamTrigP1"
 		self.ID = 13
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -162,7 +162,7 @@ class statusCamTrigP2(data):
 	def __init__(self):
 		self.name = "statusCamTrigP2"
 		self.ID = 14
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -173,7 +173,7 @@ class statusChokerAdd(data):
 	def __init__(self):
 		self.name = "statusChokerAdd"
 		self.ID = 15
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -184,7 +184,7 @@ class statusLambdaPWM(data):
 	def __init__(self):
 		self.name = "statusLambdaPWM"
 		self.ID = 16
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -195,29 +195,29 @@ class waterTemp(data):
 	def __init__(self):
 		self.name = "waterTemp"
 		self.ID = 17
-		self.active = 0
+		self.active = 1
 		self.rounddec = 0
 		self.datalength=16
 	
 	def conv(self,x):
-		return round((x*(-150.0/3840)+120),self.rounddec)
+		return round((x*(-150.0/3840.0)+120),self.rounddec)
 			
 class airTemp(data):
 	def __init__(self):
 		self.name = "airTemp"
 		self.ID = 18
-		self.active = 0
+		self.active = 1
 		self.rounddec = 1
 		self.datalength=16
 	
 	def conv(self,x):
-		return round((x*(-150.0/3840)+120),self.rounddec)
+		return round((x*(-150.0/3840.0)+120),self.rounddec)
 			
 class potmeter(data):
 	def __init__(self):
 		self.name = "potmeter"
 		self.ID = 19
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -228,7 +228,7 @@ class rpm(data):
 	def __init__(self):
 		self.name = "rpm"
 		self.ID = 20
-		self.active = 0
+		self.active = 1
 		self.rounddec = 0
 		self.datalength=16
 	
@@ -239,7 +239,7 @@ class triggerErr(data):
 	def __init__(self):
 		self.name = "triggerErr"
 		self.ID = 21
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -250,7 +250,7 @@ class camAngle1(data):
 	def __init__(self):
 		self.name = "camAngle1"
 		self.ID = 22
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -261,7 +261,7 @@ class camAngle2(data):
 	def __init__(self):
 		self.name = "camAngle2"
 		self.ID = 23
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -272,7 +272,7 @@ class roadSpeed(data):
 	def __init__(self):
 		self.name = "roadSpeed"
 		self.ID = 24
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -283,7 +283,7 @@ class mapSensor(data):
 	def __init__(self):
 		self.name = "mapSensor"
 		self.ID = 25
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -294,31 +294,31 @@ class batteryV(data):
 	def __init__(self):
 		self.name = "batteryV"
 		self.ID = 26
-		self.active = 0
+		self.active = 1
 		self.rounddec = 1
 		self.datalength=16
 	
 	def conv(self,x):
-		return round(x*(1/210),self.rounddec)
+		return round(x*(1/210.0),self.rounddec)
 			
 class lambdaV(data):
 	def __init__(self):
 		self.name = "lambdaV"
 		self.ID = 27
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
 	def conv(self,x):
 		if(x>32768):
 			x=-(65535-x)
-		return round((70-x/64)/100,self.rounddec)
+		return round((70-x/64.0)/100.0,self.rounddec)
 			
 class load(data):
 	def __init__(self):
 		self.name = "load"
 		self.ID = 28
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -329,7 +329,7 @@ class injectorTime(data):
 	def __init__(self):
 		self.name = "injectorTime"
 		self.ID = 29
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -340,7 +340,7 @@ class ignitionTime(data):
 	def __init__(self):
 		self.name = "ignitionTime"
 		self.ID = 30
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -351,7 +351,7 @@ class dwellTime(data):
 	def __init__(self):
 		self.name = "dwellTime"
 		self.ID = 31
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -362,46 +362,47 @@ class gX(data):
 	def __init__(self):
 		self.name = "gX"
 		self.ID = 32
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
 	def conv(self,x):
 		if(x>32768):
 			x = -(65535-x)
-		return round(x*(1/16384),self.rounddec)
+		return round(x*(1/16384.0),self.rounddec)
 
 class gY(data):
 	def __init__(self):
 		self.name = "gY"
 		self.ID = 33
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
 	def conv(self,x):
+		x = x+.0
 		if(x>32768):
 			x = -(65535-x)
-		return round(x*(1/16384),self.rounddec)
+		return round(x*(1/16384.0),self.rounddec)
 
 class gZ(data):
 	def __init__(self):
 		self.name = "gZ"
 		self.ID = 34
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
 	def conv(self,x):
 		if(x>32768):
 			x = -(65535-x)
-		return round(x*(1/16384),self.rounddec)
+		return round(x*(1/16384.0),self.rounddec)
 
 class motorFlags(data):
 	def __init__(self):
 		self.name = "motorFlags"
 		self.ID = 35
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=8
 	
@@ -412,7 +413,7 @@ class outBits(data):
 	def __init__(self):
 		self.name = "outBits"
 		self.ID = 36
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=8
 	
@@ -423,7 +424,7 @@ class time(data):
 	def __init__(self):
 		self.name = "time"
 		self.ID = 37
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=8
 	
@@ -434,7 +435,7 @@ class gearUp(data):
 	def __init__(self):
 		self.name = "gearUp"
 		self.ID = 38
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=8
 	
@@ -445,7 +446,7 @@ class fWheelL(data):
 	def __init__(self):
 		self.name = "fWheelL"
 		self.ID = 39
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -456,7 +457,7 @@ class fWheelR(data):
 	def __init__(self):
 		self.name = "fWheelR"
 		self.ID = 40
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -467,7 +468,7 @@ class bWheelL(data):
 	def __init__(self):
 		self.name = "bWheelL"
 		self.ID = 41
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -478,7 +479,7 @@ class bWheelR(data):
 	def __init__(self):
 		self.name = "bWheelR"
 		self.ID = 42
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -489,22 +490,35 @@ class gearBoardTemp(data):
 	def __init__(self):
 		self.name = "gearBoardTemp"
 		self.ID = 52
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
 	def conv(self,x):
-		Resistance = ((1024000/(1024-x)) - 10000)
-		Temp = math.log(Resistance)
-		Temp = 1 / (0.001129148 + (0.000234125 * Temp) + (0.0000000876741 * Temp * Temp * Temp))
-		x = Temp - 273.15
+		try:
+			Resistance = ((1024000.0/(1024.0-x)) - 10000)
+			Temp = math.log(Resistance)
+			Temp = 1 / (0.001129148 + (0.000234125 * Temp) + (0.0000000876741 * Temp * Temp * Temp))
+			x = Temp - 273.15
+		except ValueError:
+			print "ERROR!!!!!!!!!"
+			print Resistance
+			print x
+			print "."
+			print "."
+			print "."
+			print "."
+			print "."
+			print "."
+			print "."
+			print "."
 		return round(x,self.rounddec)
 
 class oilPress(data):
 	def __init__(self):
 		self.name = "oilPress"
 		self.ID = 56
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -537,7 +551,7 @@ class gpsSat(data):
 	def __init__(self):
 		self.name = "gpsSat"
 		self.ID = 59
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=8
 	
@@ -548,7 +562,7 @@ class gpsSpeed(data):
 	def __init__(self):
 		self.name = "gpsSpeed"
 		self.ID = 60
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -559,7 +573,7 @@ class gpsTimeH(data):
 	def __init__(self):
 		self.name = "gpsTimeH"
 		self.ID = 61
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -570,7 +584,7 @@ class gpsTimeM(data):
 	def __init__(self):
 		self.name = "gpsTimeM"
 		self.ID = 62
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -581,7 +595,7 @@ class gpsTimeS(data):
 	def __init__(self):
 		self.name = "gpsTimeS"
 		self.ID = 63
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -592,7 +606,7 @@ class gearNeutral(data):
 	def __init__(self):
 		self.name = "gearNeutral"
 		self.ID = 64
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -605,7 +619,7 @@ class gearEst(data):
 	def __init__(self):
 		self.name = "gearEst"
 		self.ID = 65
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -616,7 +630,7 @@ class debug(data):
 	def __init__(self):
 		self.name = "debug"
 		self.ID = 66
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -627,7 +641,7 @@ class valueIdLength(data):
 	def __init__(self):
 		self.name = "valueIdLength"
 		self.ID = 67
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 		self.datalength=16
 	
@@ -662,7 +676,7 @@ class Fuelpress(data):
 	def __init__(self):
 		self.name = "Fuel Press"
 		self.ID = 1
-		self.active = 0
+		self.active = 1
 		self.rounddec = 2
 	def conv(self,x):
 		return round(x,self.rounddec)*2
@@ -675,11 +689,11 @@ class datatype(object):
 		if(key == 0):
 			pass
 		elif(key == 1):
-			self.__class__ = FuelPress
+			self.__class__ = fuelPress
 		elif(key == 2):
-			self.__class__ = StatusLapCount
+			self.__class__ = statusLapCount
 		elif(key == 3):
-			self.__class__ = StatusInJSum
+			self.__class__ = statusInJSum
 		elif(key == 4):
 			self.__class__ = lastGearShift
 		elif(key == 5):

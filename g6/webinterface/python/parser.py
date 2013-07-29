@@ -36,12 +36,12 @@ class parser(threading.Thread):
 
 	def getDataLength(self,dataType):
 		length = data.datatype(ord(dataType)).datalength
-		print data.datatype(ord(dataType)).name
+		#print data.datatype(ord(dataType)).name
 		return length
 		
 	def parse(self,dataType,readData):
 		#print len(readData)
-		x = 0
+		x = 0.0
 		#print readData
 		if(len(readData) == 1):
 			x = ord(readData[0])
@@ -49,7 +49,9 @@ class parser(threading.Thread):
 			x = ord(readData[0])*(2**8)+ord(readData[1])
 		converted = data.datatype(ord(dataType)).conv(x)
 		if(self.q != None):
-			self.q.put([ord(dataType),x])
+			self.q.put([ord(dataType),converted])
+		else:
+			print [ord(dataType),converted]
 	
 		
 	def run(self):
