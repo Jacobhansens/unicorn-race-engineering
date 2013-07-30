@@ -209,14 +209,16 @@ int main (void)
 		}
 
 		/* Indicator for Gear */
-		if (params.GearNeutral > 0) {
+		if (params.GearNeutral < 0) {
 			SEG_N(LED_ON);
 		} else {
 			if (params.GearEst > 6) {
 				SEG_OFF();
 			} else {
 				switch (params.GearEst) {
-
+                    case 0:
+						SEG_N(LED_ON);
+						break;
 					case 1:
 						SEG_1(LED_ON);
 						break;

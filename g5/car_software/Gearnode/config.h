@@ -38,7 +38,8 @@
 #define MIDPOS 332
 //#define BUTPOS 42
 #define UPPOS 210
-#define NEUPOS 400
+#define NEUPOS1 264
+#define NEUPOS2 400
 #define DOWNPOS 500
 #define GEARWAIT 500
 
