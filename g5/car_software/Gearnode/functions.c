@@ -39,8 +39,16 @@ void gearDown(void){
     //gearButActive = 0;
 }
 
-void gearNeutral(void){
-	servoPosition(NEUPOS);
+void gearNeutral1(void){
+	servoPosition(NEUPOS1);
+	_delay_ms(GEARWAIT);
+	servoPosition(MIDPOS);
+	_delay_ms(GEARWAIT);
+    //gearButActive = 0;
+}
+
+void gearNeutral2(void){
+	servoPosition(NEUPOS2);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
