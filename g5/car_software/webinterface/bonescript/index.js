@@ -164,7 +164,7 @@ exports.Server = function(port, subdir, onconnect) {
         //io6.sockets.on('connection', onconnect);
         var io = socket.listen(this.server);
         io.sockets.on('connection', onconnect);
-		io.set('log level',3); // Stop logging to terminal
+		io.set('log level',1); // Stop logging to terminal
     }
     this.begin = function() {
         //this.server6.listen(port, '::0');
