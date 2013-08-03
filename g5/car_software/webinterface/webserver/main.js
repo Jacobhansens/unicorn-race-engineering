@@ -55,8 +55,7 @@ sp.on("data", function (data){
 });
 //##############################################################################
 var onconnect = function(socket) {  
-	console.log("onconnect!");      
-    	
+
 	// Array of connected clients
 	clientSocketList[socket.id] = socket;
 	clientSocketListID[socket.id]  = socket.id;
@@ -88,7 +87,6 @@ var onconnect = function(socket) {
 var txData = function(dataTxtmp){  
 		// Transmitt to all clients (her kan vaelges lavere frekvens til eks. smartphones).
 		for(var key in clientSocketList){
-			console.log(Object.size(clientSocketListID));
 			clientSocketList[key].emit('data', "" + JSON.stringify(dataTxtmp));
 		}		
 };    
