@@ -35,7 +35,7 @@ var FROMFILE = 0;
 
 //##############################################################################
 setup = function() {
-    var server = new bb.Server(9999, "./client_files", onconnect);  
+    var server = new bb.Server(80, "./client_files", onconnect);  
     console.log("Start...\n");       
 
 	// Create object with active data
