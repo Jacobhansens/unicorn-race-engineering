@@ -44,7 +44,7 @@ setup = function() {
 			dataType_active[key] = dataType[key];
         }
 	}
-
+	console.log("Beginning Server");
     server.begin();    
 };
 //##############################################################################
