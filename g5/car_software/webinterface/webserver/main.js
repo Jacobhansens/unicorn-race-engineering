@@ -85,9 +85,9 @@ var onconnect = function(socket) {
 };
 //##############################################################################
 var txData = function(dataTxtmp){  
-	console.log("Txdata called");
 		// Transmitt to all clients (her kan vaelges lavere frekvens til eks. smartphones).
 		for(var key in clientSocketList){
+			console.log(Object.size(clientSocketListID));
 			clientSocketList[key].emit('data', "" + JSON.stringify(dataTxtmp));
 		}		
 };    
