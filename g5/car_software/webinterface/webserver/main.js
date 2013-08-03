@@ -45,7 +45,21 @@ setup = function() {
         }
 	}
     server.begin();    
-	console.log("Beginning Server");
+    var os = require('os')
+
+	var interfaces = os.networkInterfaces();
+	var addresses = [];
+	for (k in interfaces) {
+		for (k2 in interfaces[k]) {
+			var address = interfaces[k][k2];
+			if (address.family == 'IPv4' && !address.internal) {
+				addresses.push(address.address)
+			}
+		}
+	}
+	console.log("Access the webpage located on:")
+	console.log(addresses)
+	//console.log("Beginning Server");
 };
 //##############################################################################
 // New serial data in
@@ -174,7 +188,7 @@ var newdata = function(data){
 			 // Pak data her, og kald dataTx
 			else{
 				// Tx data to all clients
-				console.log("Tx data -------------------------------------------------");
+				//console.log("Tx data -------------------------------------------------");
 				txData(dataTx);
 				dataCounter = 0;
 				dataTx = [];
