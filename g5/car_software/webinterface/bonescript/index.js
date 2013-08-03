@@ -89,7 +89,7 @@ if(fibers.exists) {
 // This is a helper function for web servers
 var loadFile = function(uri, subdir, res, type) {
     var filename = path.join(subdir, uri);
-    path.exists(
+    fs.exists(
         filename,
         function(exists) {
             if(!exists) {
