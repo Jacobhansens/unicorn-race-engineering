@@ -54,7 +54,8 @@ sp.on("data", function (data){
 	newdata(data);	
 });
 //##############################################################################
-var onconnect = function(socket) {        
+var onconnect = function(socket) {  
+	console.log("onconnect!");      
     	
 	// Array of connected clients
 	clientSocketList[socket.id] = socket;
