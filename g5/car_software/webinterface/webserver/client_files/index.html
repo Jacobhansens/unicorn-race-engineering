@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>UC live data</title>
-<script src="/socket.io/socket.io.js"></script>
+<script src="http://localhost/socket.io/socket.io.js"></script>
 <script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 <script language="javascript" type="text/javascript" src="client_functions.js"></script>
@@ -163,7 +163,7 @@ functions.js
 */
 //##############################################################################
 // Globals
-var socket = io.connect();
+var socket = io.connect("http://localhost");
 var totalPoints = 101;
 var liveplots = 4;
 var config = {};
