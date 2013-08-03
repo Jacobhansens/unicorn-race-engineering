@@ -1,3 +1,4 @@
+console.log("Starting program");
 var bb = require('../bonescript');
 var fs = require('fs');
 var serialport = require('serialport');
