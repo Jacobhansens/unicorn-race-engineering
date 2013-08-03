@@ -35,7 +35,7 @@ var FROMFILE = 0;
 
 //##############################################################################
 setup = function() {
-    var server = new bb.Server(8080, "./client_files", onconnect);  
+    var server = new bb.Server(9900, "./client_files", onconnect);  
     console.log("Start...\n");       
 
 	// Create object with active data
@@ -45,6 +45,7 @@ setup = function() {
         }
 	}
     server.begin();    
+	console.log("Beginning Server");
 };
 //##############################################################################
 // New serial data in
@@ -219,5 +220,4 @@ if(FROMFILE == 1){
 }
 //##############################################################################
 
-console.log("Beginning Server");
 bb.run();
