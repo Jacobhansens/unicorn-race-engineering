@@ -168,7 +168,7 @@ exports.Server = function(port, subdir, onconnect) {
     }
     this.begin = function() {
         //this.server6.listen(port, '::0');
-        //this.server.listen(port);
+        this.server.listen(port);
         
     };
 };
