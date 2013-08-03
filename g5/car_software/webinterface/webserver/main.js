@@ -8,7 +8,8 @@ require('./server_files/server_functions');
 // Serial port
 var SerialPort = serialport.SerialPort; // localize object constructor
 var baudrate = 115200;
-var port = "/dev/tty.usbserial-A700eCo8";
+//var port = "/dev/tty.usbserial-A700eCo8";
+var port = "/dev/ttyUSB0";
 var sp = new SerialPort(port, {
 	parser: serialport.parsers.raw,
 	baudrate: baudrate
