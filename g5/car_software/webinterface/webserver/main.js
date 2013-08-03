@@ -44,7 +44,6 @@ setup = function() {
 			dataType_active[key] = dataType[key];
         }
 	}
-	console.log("Beginning Server");
     server.begin();    
 };
 //##############################################################################
@@ -220,4 +219,5 @@ if(FROMFILE == 1){
 }
 //##############################################################################
 
+console.log("Beginning Server");
 bb.run();
