@@ -157,7 +157,7 @@ var newdata = function(data){
 				dataTx[dataCounter].val = value;	
 				dataCounter	++;
 				
-				console.log("ID:\t"+dataType[dataTypeKey].ID+"\tType:\t"+nameTerm+"\tData:\t"+value);	
+				//console.log("ID:\t"+dataType[dataTypeKey].ID+"\tType:\t"+nameTerm+"\tData:\t"+value);	
 			}
 			
 			// Reset
