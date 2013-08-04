@@ -1,14 +1,16 @@
+console.log("Starting program");
 var bb = require('../bonescript');
 var fs = require('fs');
-var io = require('socket.io');
 var serialport = require('serialport');
+var io = require('socket.io');
 var dataType = require('./sensor_config');
 require('./server_files/server_functions');
 
 // Serial port
 var SerialPort = serialport.SerialPort; // localize object constructor
 var baudrate = 115200;
-var port = "/dev/tty.usbserial-A700eCo8";
+//var port = "/dev/tty.usbserial-A700eCo8";
+var port = "/dev/ttyUSB0";
 var sp = new SerialPort(port, {
 	parser: serialport.parsers.raw,
 	baudrate: baudrate
@@ -42,8 +44,22 @@ setup = function() {
 			dataType_active[key] = dataType[key];
         }
 	}
-
     server.begin();    
+    var os = require('os')
+
+	var interfaces = os.networkInterfaces();
+	var addresses = [];
+	for (k in interfaces) {
+		for (k2 in interfaces[k]) {
+			var address = interfaces[k][k2];
+			if (address.family == 'IPv4' && !address.internal) {
+				addresses.push(address.address)
+			}
+		}
+	}
+	console.log("Access the webpage located on:")
+	console.log(addresses)
+	//console.log("Beginning Server");
 };
 //##############################################################################
 // New serial data in
@@ -52,8 +68,8 @@ sp.on("data", function (data){
 	newdata(data);	
 });
 //##############################################################################
-var onconnect = function(socket) {        
-    	
+var onconnect = function(socket) {  
+
 	// Array of connected clients
 	clientSocketList[socket.id] = socket;
 	clientSocketListID[socket.id]  = socket.id;
@@ -155,7 +171,7 @@ var newdata = function(data){
 				dataTx[dataCounter].val = value;	
 				dataCounter	++;
 				
-				console.log("ID:\t"+dataType[dataTypeKey].ID+"\tType:\t"+nameTerm+"\tData:\t"+value);	
+				//console.log("ID:\t"+dataType[dataTypeKey].ID+"\tType:\t"+nameTerm+"\tData:\t"+value);	
 			}
 			
 			// Reset
@@ -172,7 +188,7 @@ var newdata = function(data){
 			 // Pak data her, og kald dataTx
 			else{
 				// Tx data to all clients
-				console.log("Tx data -------------------------------------------------");
+				//console.log("Tx data -------------------------------------------------");
 				txData(dataTx);
 				dataCounter = 0;
 				dataTx = [];
