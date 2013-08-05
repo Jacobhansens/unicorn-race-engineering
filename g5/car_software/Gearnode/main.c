@@ -82,8 +82,8 @@ int main(void)
 		gearDown();
 		gearDown();
 		gearDown();
-		gearNeutral();
-        */
+		*/
+        
 
     }
     return 0;

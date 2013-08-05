@@ -37,10 +37,10 @@
 //#define TOPPOS 617
 #define MIDPOS 332
 //#define BUTPOS 42
-#define UPPOS 210
-#define NEUPOS1 264
-#define NEUPOS2 400
-#define DOWNPOS 500
+#define UPPOS 200		//210
+#define NEUPOS1 254		//264
+#define NEUPOS2 390		//400
+#define DOWNPOS 490		//500
 #define GEARWAIT 500
 
 // Error msg.
