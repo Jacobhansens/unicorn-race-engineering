@@ -122,7 +122,6 @@ int main (void)
 	while (1) {
 		_delay_ms(20);
 
-		
 		/* Display selected parameter */
 		if (mode == RPM_MODE) {		
 			set_rpm(params.rpm, LED_ON);

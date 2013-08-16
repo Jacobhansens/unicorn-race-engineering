@@ -22,37 +22,55 @@ void servoPosition(unsigned int position) {
 }//Maximum: 0x01, 0xAE; //Minimum: 0x00, 0x45;
 
 void gearUp(void){
-    servoPosition(UPPOS);
+	IgnCutOn;
+	_delay_ms(100);	
+	servoPosition(UPPOS);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
     sendtekst("2");
     //gearButActive = 0;
-}
+	_delay_ms(100);
+	IgnCutOff;
+	
+	
+	}
 
 void gearDown(void){
+	IgnCutOn;
+	_delay_ms(100);	
 	servoPosition(DOWNPOS);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
     sendtekst("4");
     //gearButActive = 0;
+	_delay_ms(100);
+	IgnCutOff;
 }
 
 void gearNeutral1(void){
+	IgnCutOn;
+	_delay_ms(100);
 	servoPosition(NEUPOS1);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
     //gearButActive = 0;
+	_delay_ms(100);
+	IgnCutOff;
 }
 
 void gearNeutral2(void){
+	IgnCutOn;
+	_delay_ms(100);
 	servoPosition(NEUPOS2);
 	_delay_ms(GEARWAIT);
 	servoPosition(MIDPOS);
 	_delay_ms(GEARWAIT);
     //gearButActive = 0;
+	_delay_ms(100);
+	IgnCutOff;
 }
 
 void servoCheck(void)
