@@ -72,8 +72,8 @@
 #define BDIS PORTA&=~(1<<PA3)
 
 // Ign Cut
-#define IgnCutOn PORTE|= (1<<PE4)
-#define IgnCutOff PORTE&=~ (1<<PE4)
+#define IgnCutOn PORTE|= (1<<PE4)	//Turn on PE4(måske)
+#define IgnCutOff PORTE&=~ (1<<PE4)	//Turn off PE4(måske)
 
 // Gearneutralmeasure
 #define GEARNEUTRALMEAS (!((PINE&0b10000000)==0b10000000))
